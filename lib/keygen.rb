@@ -3,14 +3,30 @@
 # digits, the 3rd and 4th digits, and the 4th and 5th digits.
 class KeyGen
   def initialize
-    @digit_1 = rand(0..9)
-    @digit_2 = rand(0..9)
-    @digit_3 = rand(0..9)
-    @digit_4 = rand(0..9)
-    @digit_5 = rand(0..9)
+    @digit1 = rand(0..9)
+    @digit2 = rand(0..9)
+    @digit3 = rand(0..9)
+    @digit4 = rand(0..9)
+    @digit5 = rand(0..9)
   end
 
   def key
-    [@digit_1, @digit_2, @digit_3, @digit_4, @digit_5].join.to_i
+    [@digit1, @digit2, @digit3, @digit4, @digit5].join
+  end
+
+  def key_offset_a
+    "#{@digit1}#{@digit2}".to_i
+  end
+
+  def key_offset_b
+    "#{@digit2}#{@digit3}".to_i
+  end
+
+  def key_offset_c
+    "#{@digit3}#{@digit4}".to_i
+  end
+
+  def key_offset_d
+    "#{@digit4}#{@digit5}".to_i
   end
 end
