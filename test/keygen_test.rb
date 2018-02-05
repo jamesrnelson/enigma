@@ -1,6 +1,7 @@
 require 'minitest/autorun'
 require 'minitest/pride'
 require './lib/keygen'
+require 'pry'
 
 class KeyGenTest < Minitest::Test
   def test_key_gen_exists
@@ -25,7 +26,7 @@ class KeyGenTest < Minitest::Test
     new_key13 = KeyGen.new
     new_key14 = KeyGen.new
     new_key15 = KeyGen.new
-
+    binding.pry
     assert_equal 5, new_key1.key.length
     assert_equal 5, new_key2.key.length
     assert_equal 5, new_key3.key.length
