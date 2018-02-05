@@ -2,6 +2,7 @@ require 'simplecov'
 require 'minitest/autorun'
 require 'minitest/pride'
 require './lib/keygen'
+require 'pry'
 
 SimpleCov.start
 
