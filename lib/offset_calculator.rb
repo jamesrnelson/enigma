@@ -4,11 +4,19 @@
 # and then determine the total rotation for each letter.
 require 'Date'
 
-
 class OffsetCalculator
   def initialize
   end
 
+  def the_date
+    date = Date.today
+    date_string = date.strftime("%d%m%y")
+  end
+
+  def the_squared_date(date_string)
+    square = date_string.to_i ** 2
+    square.to_s
+  end
 
 end
 
