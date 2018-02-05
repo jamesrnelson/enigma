@@ -4,15 +4,21 @@ require './lib/enigma'
 require 'pry'
 
 class EnigmaTest < Minitest::Test
+  def setup
+    @e = Enigma.new
+  end
+
   def test_it_exists
-    e = Enigma.new
-    assert_instance_of Enigma, e
+    assert_instance_of Enigma, @e
   end
 
   def test_input
-    e = Enigma.new
-    assert_equal "Hello World", e.read_data_input
+    assert_equal "Hello World", @e.read_input
+  end
 
+  def test_output
+    @e.read_input
+    assert_equal "Hello World", @e.write_output
   end
 
 end
