@@ -34,4 +34,12 @@ class EnigmaTest < Minitest::Test
   def test_loops_back_to_beggining_of_characters
     assert_equal ["h", "e", "l", "l", "o"], @e.encrypt("hello", 39)
   end
+
+  def test_looping_with_inputs_at_end_of_characters
+    assert_equal ["a", "b", "c", "d"], @e.encrypt("9 .,", 82)
+  end
+
+  def test_rotation_cycles_for_each_letter
+    assert_equal ["i", "g", "m", "n", "p"], @e.encrypt("hello", [40, 2, 40, 2])
+  end
 end
