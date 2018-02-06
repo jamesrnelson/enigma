@@ -13,6 +13,7 @@ class OffsetCalculator
 
   def initialize(date = Date.today, a = 0, b = 9)
     @key_generator = KeyGen.new(a, b)
+    @date_string = date.strftime('%d%m%y')
     @the_date = date.strftime('%d%m%y').to_i
     @the_squared_date = (@the_date**2)
     @the_date_offset = @the_squared_date.digits[0..3].reverse

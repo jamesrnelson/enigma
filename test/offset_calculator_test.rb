@@ -36,4 +36,6 @@ class OffsetCalculatorTest < Minitest::Test
   def test_final_rotation_array
     assert_equal [18, 16, 13, 15], @offset.final_rotations
   end
+
+
 end
