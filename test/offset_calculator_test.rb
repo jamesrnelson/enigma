@@ -30,6 +30,10 @@ class OffsetCalculatorTest < Minitest::Test
   end
 
   def test_the_keys_combine
-    assert_equal [[11, 7], [11,5], [11, 2], [11,4]], @offset.combine_keys
+    assert_equal [[11, 7], [11,5], [11, 2], [11,4]], @offset.combined_keys
+  end
+
+  def test_final_rotation_array
+    assert_equal [18, 16, 13, 15], @offset.final_rotations
   end
 end
