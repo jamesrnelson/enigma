@@ -24,7 +24,17 @@ class Enigma
 
   def encrypt(input, rotation)
      input.chars.map do |letter|
-       @characters[@characters.find_index(letter.downcase) + (rotation % 39) - 39]
+       if input.chars.index(letter) % 4 == 0
+         @characters[@characters.find_index(letter.downcase) + (rotation[0] % 39) - 39]
+       elsif input.chars.index(letter) % 4 == 1
+         @characters[@characters.find_index(letter.downcase) + (rotation[1] % 39) - 39]
+       elsif input.chars.index(letter) % 4 == 2
+         @characters[@characters.find_index(letter.downcase) + (rotation[2] % 39) - 39]
+       elsif input.chars.index(letter) % 4 == 3
+         @characters[@characters.find_index(letter.downcase) + (rotation[3] % 39) - 39]
+       end
      end
   end
+
+
 end
