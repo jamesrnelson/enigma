@@ -24,22 +24,22 @@ class EnigmaTest < Minitest::Test
   end
 
   def test_encrypting_one_letter_with_fixed_rotation
-    assert_equal ["h"], @e.encrypt("d", 4)
+    assert_equal ["h"], @e.encrypt("d", [4])
   end
 
   def test_encrypting_two_letters_with_fixed_rotation
-    assert_equal ["k", "l"], @e.encrypt("hi", 3)
+    assert_equal ["k", "l"], @e.encrypt("hi", [3, 3])
   end
 
   def test_loops_back_to_beggining_of_characters
-    assert_equal ["h", "e", "l", "l", "o"], @e.encrypt("hello", 39)
+    assert_equal ["h", "e", "l", "l", "o"], @e.encrypt("hello", [39, 39, 39, 39])
   end
 
   def test_looping_with_inputs_at_end_of_characters
-    assert_equal ["a", "b", "c", "d"], @e.encrypt("9 .,", 82)
+    assert_equal ["a", "b", "c", "d"], @e.encrypt("9 .,", [82, 82, 82, 82])
   end
 
   def test_rotation_cycles_for_each_letter
-    assert_equal ["i", "g", "m", "n", "p"], @e.encrypt("hello", [40, 2, 40, 2])
+    assert_equal ["b", "c", "d", "e", "b"], @e.encrypt("aaaaa", [1, 2, 3, 4])
   end
 end

@@ -22,19 +22,24 @@ class Enigma
     @text
   end
 
-  def encrypt(input, rotation)
-     input.chars.map do |letter|
-       if input.chars.index(letter) % 4 == 0
-         @characters[@characters.find_index(letter.downcase) + (rotation[0] % 39) - 39]
-       elsif input.chars.index(letter) % 4 == 1
-         @characters[@characters.find_index(letter.downcase) + (rotation[1] % 39) - 39]
-       elsif input.chars.index(letter) % 4 == 2
-         @characters[@characters.find_index(letter.downcase) + (rotation[2] % 39) - 39]
-       elsif input.chars.index(letter) % 4 == 3
-         @characters[@characters.find_index(letter.downcase) + (rotation[3] % 39) - 39]
-       end
-     end
+  def rotations
+    OffsetCalculator.new
   end
 
-
+  def encrypt(input, rotation = [a = 0, b = 0, c = 0, d = 0])
+    rotation = rotations.final_rotations
+      counter = -1
+      input.chars.map do |letter|
+        counter += 1
+         if counter % 4 == 0
+           @characters[@characters.find_index(letter.downcase) + (rotation[0] % 39) - 39]
+         elsif counter % 4 == 1
+           @characters[@characters.find_index(letter.downcase) + (rotation[1] % 39) - 39]
+         elsif counter % 4 == 2
+           @characters[@characters.find_index(letter.downcase) + (rotation[2] % 39) - 39]
+         elsif counter % 4 == 3
+           @characters[@characters.find_index(letter.downcase) + (rotation[3] % 39) - 39]
+         end
+     end
+  end
 end
