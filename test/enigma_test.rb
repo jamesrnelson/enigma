@@ -23,6 +23,11 @@ class EnigmaTest < Minitest::Test
     assert_equal "Hello World", @e.write_output
   end
 
+  def test_encrypting_one_letter_with_fixed_rotation
+    assert_equal "h", @e.encrypt("d", 4)
+  end
 
-
+  def test_encrypting_two_letters_with_fixed_rotation
+    assert_equal "kl", @e.encrypt("hi", 3)
+  end
 end
