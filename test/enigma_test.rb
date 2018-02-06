@@ -24,10 +24,14 @@ class EnigmaTest < Minitest::Test
   end
 
   def test_encrypting_one_letter_with_fixed_rotation
-    assert_equal "h", @e.encrypt("d", 4)
+    assert_equal ["h"], @e.encrypt("d", 4)
   end
 
   def test_encrypting_two_letters_with_fixed_rotation
-    assert_equal "kl", @e.encrypt("hi", 3)
+    assert_equal ["k", "l"], @e.encrypt("hi", 3)
+  end
+
+  def test_loops_back_to_beggining_of_characters
+    assert_equal ["h", "e", "l", "l", "o"], @e.encrypt("hello", 39)
   end
 end

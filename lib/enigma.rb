@@ -2,12 +2,11 @@ require './lib/keygen'
 require './lib/offset_calculator'
 require 'pry'
 class Enigma
-  attr_reader :input, :output, :text, :characters, :new_letters
+  attr_reader :input, :output, :text, :characters
   def initialize(a = 0, b = 9)
     @input  = ARGV[0]
     @output = ARGV[1]
     @text   = text
-    @new_letters = []
     @characters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k',
                       'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v',
                       'w', 'x', 'y', 'z', '0', '1', '2', '3', '4', '5', '6',
@@ -25,8 +24,7 @@ class Enigma
 
   def encrypt(input, rotation)
      input.chars.map do |letter|
-       @new_letters = @characters[@characters.find_index(letter.downcase) + rotation]
+       @characters[@characters.find_index(letter.downcase) + (rotation % 39) - 39]
      end
-     @new_letters
   end
 end
