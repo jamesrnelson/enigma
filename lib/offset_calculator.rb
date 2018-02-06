@@ -8,7 +8,7 @@ class OffsetCalculator
               :the_squared_date,
               :the_date_offset
 
-  def initialize(date=Date.today, a=0, b=9)
+  def initialize(date=Date.today, a = 0, b = 9)
     @key_generator = KeyGen.new(a, b)
     @the_date = date.strftime('%d%m%y').to_i
     @the_squared_date = (@the_date**2)
