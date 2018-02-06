@@ -23,12 +23,6 @@ class EnigmaTest < Minitest::Test
     assert_equal "Hello World", @e.write_output
   end
 
-  def test_combine_key_and_date_offset_a
-    assert_equal 18, @e.rotation_a
-  end
 
-  def test_combine_key_and_date_offset_b
-    assert_equal 18, @e.rotation_b
-  end
 
 end
