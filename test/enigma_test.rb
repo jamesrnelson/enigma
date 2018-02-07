@@ -44,7 +44,7 @@ class EnigmaTest < Minitest::Test
   end
 
   def test_decryption_is_encryption_with_operations_reversed
-    assert_equal "aaaaa", @e.decrypt("bcdeb", [1, 2, 3, 4])
+    assert_equal "vng7v", @e.decrypt("bcdeb", "12345")
   end
 
   def test_manual_key_entry_all
@@ -54,6 +54,12 @@ class EnigmaTest < Minitest::Test
   def test_date_offset
     assert_equal [7, 5, 2, 4], @e.date_offset
   end
+  def test_sum_of_combiner
+    assert_equal [19, 28, 36, 49], @e.combiner("12345")
+  end
 
+  def test_decryptor_creates_and_uses_combiner_array
+    assert_equal "aaaa", @e.decrypt("    ", "12345")
+  end
 
 end
