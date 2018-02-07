@@ -46,18 +46,17 @@ class Enigma
   end
 
   def decrypt(scrambled_message, key)
-    binding.pry
     counter = -1
     scrambled_message.chars.map do |letter|
     counter += 1
       if counter % 4 == 0
-        @characters[@characters.find_index(letter.downcase) - (combiner(key)[0] % 39) - 39]
+        @characters[-@characters.find_index(letter.downcase) + (combiner(key)[0] % 39) - 39]
       elsif counter % 4 == 1
-        @characters[@characters.find_index(letter.downcase) - (combiner(key)[1] % 39) - 39]
+        @characters[-@characters.find_index(letter.downcase) + (combiner(key)[1] % 39) - 39]
       elsif counter % 4 == 2
-        @characters[@characters.find_index(letter.downcase) - (combiner(key)[2] % 39) - 39]
+        @characters[-@characters.find_index(letter.downcase) + (combiner(key)[2] % 39) - 39]
       elsif counter % 4 == 3
-        @characters[@characters.find_index(letter.downcase) - (combiner(key)[3] % 39) - 39]
+        @characters[-@characters.find_index(letter.downcase) + (combiner(key)[3] % 39) - 39]
       end
     end.join
   end
