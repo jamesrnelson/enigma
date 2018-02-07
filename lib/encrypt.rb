@@ -9,4 +9,4 @@ key       = KeyGen.new
 
 e.read_input
 e.encrypt(@text)
-puts "Created #{@output} with the key #{key.key_string} and date #{rotations.date_string}"
+puts "Created #{@output} with the key #{key.key_offset} and date #{rotations.date_string}"
