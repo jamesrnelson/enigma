@@ -44,7 +44,7 @@ class EnigmaTest < Minitest::Test
   end
 
   def test_decryption_is_encryption_with_operations_reversed
-    assert_equal "vng7v", @e.decrypt("bcdeb", "12345")
+    assert_equal "uld2", @e.decrypt("aaaa", "12345")
   end
 
   def test_manual_key_entry_all
@@ -59,7 +59,7 @@ class EnigmaTest < Minitest::Test
   end
 
   def test_decryptor_creates_and_uses_combiner_array
-    assert_equal "aaaa", @e.decrypt("    ", "12345")
+    assert_equal "aaaa", @e.decrypt("t2 k", "12345")
   end
 
 end
