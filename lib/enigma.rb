@@ -53,6 +53,7 @@ class Enigma
   def decrypt(scrambled_message, key)
     key = @command_line_key
     counter = -1
+    scrambled_message = @text
     scrambled_message.chars.map do |letter|
     counter += 1
       if counter % 4 == 0
@@ -65,6 +66,7 @@ class Enigma
         @characters[-@characters.find_index(letter.downcase) + (combiner(key)[3] % 39) - 39]
       end
     end.join
+    write_output
   end
 
   def manual_key_entry(key_string)
@@ -78,8 +80,8 @@ class Enigma
   end
 
   def date_offset(date = Date.today)
-    date = @command_line_date
-    squared_date = date.strftime('%d%m%y').to_i**2
+    date = @command_line_date.to_s
+    squared_date = date.to_i ** 2#.strftime('%d%m%y').to_i**2
     squared_date.digits[0..3].reverse
   end
 
