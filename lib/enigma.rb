@@ -8,6 +8,8 @@ class Enigma
   def initialize(a = 0, b = 9)
     @input  = ARGV[0]
     @output = ARGV[1]
+    @command_line_key = ARGV[2]
+    @command_line_date = ARGV[3]
     @text   = text
     @characters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k',
                       'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v',
@@ -17,21 +19,23 @@ class Enigma
 
   def read_input
     @text = File.read(input).gsub("\n", "")
+
   end
 
   def write_output
-    File.open(output, 'w') { |file| file.write(text) }
-    @text
+    File.open(output, 'w') { |file| file.write(@text) }
+    # puts "Created #{@output} with the key #{@key_string} and date #{rotations.date_string}"
   end
 
-  # def rotations
-  #   OffsetCalculator.new
-  # end
+  def rotations
+    OffsetCalculator.new
+  end
 
   def encrypt(input, rotation = [a = 0, b = 0, c = 0, d = 0])
-    # rotation = rotations.final_rotations
+    input = @text
+    rotation = rotations.final_rotations
     counter = -1
-    input.chars.map.with_index do |letter|
+    @text = input.chars.map.with_index do |letter|
       counter += 1
       if counter % 4 == 0
         @characters[@characters.find_index(letter.downcase) + (rotation[0] % 39) - 39]
@@ -43,16 +47,18 @@ class Enigma
         @characters[@characters.find_index(letter.downcase) + (rotation[3] % 39) - 39]
       end
     end.join
+     write_output
   end
 
   def decrypt(scrambled_message, key)
+    key = @command_line_key
     counter = -1
     scrambled_message.chars.map do |letter|
     counter += 1
       if counter % 4 == 0
         @characters[-@characters.find_index(letter.downcase) + (combiner(key)[0] % 39) - 39]
       elsif counter % 4 == 1
-        @characters[-@characters.find_index(letter.downcase) + (combiner(key)[1] % 39) - 39]
+        @characters[-@characters.find_index(letter.downcase) + (combiner(key)[1]  % 39) - 39]
       elsif counter % 4 == 2
         @characters[-@characters.find_index(letter.downcase) + (combiner(key)[2] % 39) - 39]
       elsif counter % 4 == 3
@@ -71,8 +77,8 @@ class Enigma
     [key_a.to_i, key_b.to_i, key_c.to_i, key_d.to_i]
   end
 
-  def date_offset
-    date = Date.today
+  def date_offset(date = Date.today)
+    date = @command_line_date
     squared_date = date.strftime('%d%m%y').to_i**2
     squared_date.digits[0..3].reverse
   end

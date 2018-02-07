@@ -44,7 +44,7 @@ class EnigmaTest < Minitest::Test
   end
 
   def test_decryption_is_encryption_with_operations_reversed
-    assert_equal "uld2", @e.decrypt("aaaa", "12345")
+    assert_equal "tld2", @e.decrypt("aaaa", "12345")
   end
 
   def test_manual_key_entry_all
