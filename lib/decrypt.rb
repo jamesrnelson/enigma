@@ -8,5 +8,5 @@ rotations = OffsetCalculator.new
 key       = KeyGen.new
 
 e.read_input
-e.encrypt(@text)
-puts "Created #{@output} with the key #{key.key_string} and date #{rotations.date_string}"
+e.decrypt(@text, @command_line_key.to_s)
+puts "Created #{@output} with the key #{@command_line_key} and date #{@command_line_date}"
