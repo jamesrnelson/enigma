@@ -45,6 +45,7 @@ class Enigma
   end
 
   def decrypt(scrambled_message, key)
+    key = combiner(key)
     counter = -1
     scrambled_message.chars.map do |letter|
     counter += 1
@@ -61,6 +62,7 @@ class Enigma
   end
 
   def manual_key_entry(key_string)
+    #binding.pry
     key_digits = key_string.chars
     key_a = key_digits[0] + key_digits[1]
     key_b = key_digits[1] + key_digits[2]
@@ -75,9 +77,11 @@ class Enigma
     squared_date.digits[0..3].reverse
   end
 
-  def combiner
-    key_date_offset = manual_key_entry.zip(date_offset)
+  def combiner(key_string)
+    key_date_offset = manual_key_entry(key_string).zip(date_offset)
+    key_date_offset.map { |key| key.sum }
   end
+
 
   def crack(scrambled_message, date)
 
