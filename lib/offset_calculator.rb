@@ -1,9 +1,7 @@
 require 'Date'
 require 'pry'
 require './lib/keygen'
-# This calculator will take the key created by keygen,
-# perform some math wizardry with the current date,
-# and then determine the total rotation for each letter.
+
 class OffsetCalculator
   attr_reader :the_date,
               :the_squared_date,
@@ -21,8 +19,3 @@ class OffsetCalculator
     @final_rotations = @combined_keys.map { |key| key.sum }
   end
 end
-#lookup file.io
-
-#arg v for using command line in ruby
-# input_array = ARGV
-# Mike has a tutorial video on ARGV which is pretty good
