@@ -7,7 +7,8 @@ class OffsetCalculator
               :the_squared_date,
               :the_date_offset,
               :combined_keys,
-              :final_rotations
+              :final_rotations,
+              :date_string
 
   def initialize(date = Date.today, a = 0, b = 9)
     @key_generator = KeyGen.new(a, b)
