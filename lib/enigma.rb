@@ -19,7 +19,7 @@ class Enigma
 
   def write_output
     File.open(output, 'w') { |file| file.write(text) }
-    @text
+    #@text
   end
 
   def rotations
@@ -29,7 +29,7 @@ class Enigma
   def encrypt(input, rotation = [a = 0, b = 0, c = 0, d = 0])
     rotation = rotations.final_rotations
       counter = -1
-      input.chars.map do |letter|
+      @text = input.chars.map do |letter|
         counter += 1
          if counter % 4 == 0
            @characters[@characters.find_index(letter.downcase) + (rotation[0] % 39) - 39]
@@ -41,5 +41,6 @@ class Enigma
            @characters[@characters.find_index(letter.downcase) + (rotation[3] % 39) - 39]
          end
      end
+     write_output
   end
 end

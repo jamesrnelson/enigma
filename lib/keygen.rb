@@ -20,20 +20,3 @@ class KeyGen
     ].join
   end
 end
-
-#   def key_offset_a
-#     @keys[0]
-#   end
-#
-#   def key_offset_b
-#     "#{@digit2}#{@digit3}".to_i
-#   end
-#
-#   def key_offset_c
-#     "#{@digit3}#{@digit4}".to_i
-#   end
-#
-#   def key_offset_d
-#     "#{@digit4}#{@digit5}".to_i
-#   end
-# end
