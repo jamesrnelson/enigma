@@ -28,16 +28,19 @@ class Enigma
 
   def read_input
     @text = File.read(input).gsub("\n", "")
+    # binding.pry
 
   end
 
-  def write__encrypt_output
-    File.open(output, 'w') { |file| file.write(@text) }
+  def write_encrypt_output
+    # binding.pry
+    File.open(@output, 'w') { |file| file.puts @text }
+    # binding.pry
     puts "Created #{@output} with the key #{@rotations.key_string} and date #{@rotations.date_string}"
   end
 
-  def write__decrypt_output
-    File.open(output, 'w') { |file| file.write(@text) }
+  def write_decrypt_output
+    File.open(@output, 'w') { |file| file.puts @text }
     puts "Created #{@output} with the key #{@command_line_key} and date #{@command_line_date}"
   end
 
@@ -46,10 +49,12 @@ class Enigma
   # end
 
   def encrypt(input, rotation = [a = 0, b = 0, c = 0, d = 0])
+
     input = @text
     rotation = @rotations.final_rotations
+    # binding.pry
     counter = -1
-    @text2 = input.chars.map.with_index do |letter|
+    @text = input.chars.map do |letter|
       counter += 1
       if counter % 4 == 0
         @characters[@characters.find_index(letter.downcase) + (rotation[0] % 39) - 39]
@@ -61,31 +66,32 @@ class Enigma
         @characters[@characters.find_index(letter.downcase) + (rotation[3] % 39) - 39]
       end
     end.join
+    # binding.pry
     write_encrypt_output
    end
 
   def decrypt(scrambled_message, key)
-    # key = @command_line_key
+    key = @command_line_key
+    scrambled_message = @text
+    # binding.pry
     counter = -1
-     scrambled_message = @text
-    @text2 = scrambled_message.chars.map do |letter|
-      binding.pry
+    @text = scrambled_message.chars.map do |letter|
     counter += 1
       if counter % 4 == 0
-        @characters[-@characters.find_index(letter.downcase) + (combiner(key)[0] % 39) - 39]
+        @characters[@characters.find_index(letter.downcase) - (combiner(key)[0] % 39) - 39]
       elsif counter % 4 == 1
-        @characters[-@characters.find_index(letter.downcase) + (combiner(key)[1]  % 39) - 39]
+        @characters[@characters.find_index(letter.downcase) - (combiner(key)[1]  % 39) - 39]
       elsif counter % 4 == 2
-        @characters[-@characters.find_index(letter.downcase) + (combiner(key)[2] % 39) - 39]
+        @characters[@characters.find_index(letter.downcase) - (combiner(key)[2] % 39) - 39]
       elsif counter % 4 == 3
-        @characters[-@characters.find_index(letter.downcase) + (combiner(key)[3] % 39) - 39]
+        @characters[@characters.find_index(letter.downcase) - (combiner(key)[3] % 39) - 39]
       end
     end.join
     write_decrypt_output
   end
 
   def manual_key_entry(key_string)
-    #binding.pry
+    key_string = @command_line_key
     key_digits = key_string.chars
     key_a = key_digits[0] + key_digits[1]
     key_b = key_digits[1] + key_digits[2]
