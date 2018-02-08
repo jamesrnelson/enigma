@@ -8,6 +8,6 @@ rotations = OffsetCalculator.new
 key       = KeyGen.new
 
 e.read_input
-e.decrypt(e.text, e.command_line_key.to_s)
-binding.pry
+e.decrypt(e.text, e.command_line_key)
+ #binding.pry
 puts "Created #{e.output} with the key #{e.command_line_key} and date #{e.command_line_date}"

@@ -7,6 +7,7 @@ class Enigma
   attr_reader :input,
               :output,
               :text,
+              :text2,
               :characters,
               :command_line_key,
               :command_line_date
@@ -16,6 +17,7 @@ class Enigma
     @command_line_key = ARGV[2]
     @command_line_date = ARGV[3]
     @text   = text
+    @text2 = nil
     @characters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k',
                       'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v',
                       'w', 'x', 'y', 'z', '0', '1', '2', '3', '4', '5', '6',
@@ -28,8 +30,7 @@ class Enigma
   end
 
   def write_output
-    File.open(output, 'w') { |file| file.write(@text) }
-    # puts "Created #{@output} with the key #{@key_string} and date #{rotations.date_string}"
+    File.open(output, 'w') { |file| file.write(@text2) }
   end
 
   def rotations
@@ -40,7 +41,7 @@ class Enigma
     input = @text
     rotation = rotations.final_rotations
     counter = -1
-    @text = input.chars.map.with_index do |letter|
+    @text2 = input.chars.map.with_index do |letter|
       counter += 1
       if counter % 4 == 0
         @characters[@characters.find_index(letter.downcase) + (rotation[0] % 39) - 39]
@@ -58,8 +59,9 @@ class Enigma
   def decrypt(scrambled_message, key)
     key = @command_line_key
     counter = -1
-    scrambled_message = @output
-    scrambled_message.chars.map do |letter|
+     scrambled_message = @text
+    #binding.pry
+    @text2 = scrambled_message.chars.map do |letter|
     counter += 1
       if counter % 4 == 0
         @characters[-@characters.find_index(letter.downcase) + (combiner(key)[0] % 39) - 39]
@@ -72,6 +74,7 @@ class Enigma
       end
     end.join
     write_output
+    # binding.pry
   end
 
   def manual_key_entry(key_string)
