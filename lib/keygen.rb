@@ -2,12 +2,12 @@ require 'pry'
 
 class KeyGen
   attr_reader :key_offset, :key_string
-  def initialize(a = 0, b = 0)
-    @digit1 = rand(0..9)
-    @digit2 = rand(0..9)
-    @digit3 = rand(0..9)
-    @digit4 = rand(0..9)
-    @digit5 = rand(0..9)
+  def initialize(a = 0, b = 9)
+    @digit1 = rand(a..b)
+    @digit2 = rand(a..b)
+    @digit3 = rand(a..b)
+    @digit4 = rand(a..b)
+    @digit5 = rand(a..b)
     @key_offset = [key_offset_a, key_offset_b, key_offset_c, key_offset_d]
   end
 

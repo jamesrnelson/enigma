@@ -132,7 +132,7 @@ class Enigma
   end
 
   def crack(scrambled_message, date)
-    scrambled_message = @text
+    scrambled_message = @output
     date = @command_line_date
     #scrambled_message.chars.map do |character|
     binding.pry
