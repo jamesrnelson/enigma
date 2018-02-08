@@ -17,7 +17,7 @@ class Enigma
     @command_line_key = ARGV[2]
     @command_line_date = ARGV[3]
     @text   = text
-    @text2 = nil
+    @text2 = text2
     @characters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k',
                       'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v',
                       'w', 'x', 'y', 'z', '0', '1', '2', '3', '4', '5', '6',
@@ -57,11 +57,11 @@ class Enigma
   end
 
   def decrypt(scrambled_message, key)
-    key = @command_line_key
+    # key = @command_line_key
     counter = -1
      scrambled_message = @text
-    #binding.pry
     @text2 = scrambled_message.chars.map do |letter|
+      binding.pry
     counter += 1
       if counter % 4 == 0
         @characters[-@characters.find_index(letter.downcase) + (combiner(key)[0] % 39) - 39]
