@@ -1,1 +1,5 @@
+<<<<<<< HEAD
 
+=======
+this is so amazing
+>>>>>>> 7397ee6f8d07ea65a438dcc4deed61d61ae0a9f7
