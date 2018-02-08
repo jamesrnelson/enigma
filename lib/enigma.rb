@@ -27,14 +27,10 @@ class Enigma
 
   def read_input
     @text = File.read(input).gsub("\n", "")
-    # binding.pry
-
   end
 
   def write_encrypt_output
-    # binding.pry
     File.open(@output, 'w') { |file| file.puts @text }
-    # binding.pry
     puts "Created #{@output} with the key #{@rotations.key_string} and date #{@rotations.date_string}"
   end
 
@@ -43,15 +39,9 @@ class Enigma
     puts "Created #{@output} with the key #{@command_line_key} and date #{@command_line_date}"
   end
 
-  # def rotations
-  #   OffsetCalculator.new
-  # end
-
   def encrypt(input, rotation = [a = 0, b = 0, c = 0, d = 0])
-
     input = @text
     rotation = @rotations.final_rotations
-    # binding.pry
     counter = -1
     @text = input.chars.map do |letter|
       counter += 1
@@ -65,14 +55,12 @@ class Enigma
         @characters[@characters.find_index(letter.downcase) + (rotation[3] % 39) - 39]
       end
     end.join
-    # binding.pry
     write_encrypt_output
    end
 
   def decrypt(scrambled_message, key)
     key = @command_line_key
     scrambled_message = @text
-    # binding.pry
     counter = -1
     @text = scrambled_message.chars.map do |letter|
     counter += 1
