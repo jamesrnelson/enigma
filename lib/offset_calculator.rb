@@ -8,10 +8,12 @@ class OffsetCalculator
               :the_date_offset,
               :combined_keys,
               :final_rotations,
-              :date_string
+              :date_string,
+              :key_string
 
   def initialize(date = Date.today, a = 0, b = 9)
     @key_generator = KeyGen.new(a, b)
+    @key_string = @key_generator.key_string
     @date_string = date.strftime('%d%m%y')
     @the_date = date.strftime('%d%m%y').to_i
     @the_squared_date = (@the_date**2)

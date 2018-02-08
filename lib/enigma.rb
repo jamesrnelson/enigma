@@ -9,10 +9,12 @@ class Enigma
               :text,
               :characters,
               :command_line_key,
-              :command_line_date
+              :command_line_date,
+              :key_string
   def initialize(a = 0, b = 9)
     @input  = ARGV[0]
     @output = ARGV[1]
+    @rotations = OffsetCalculator.new
     @command_line_key = ARGV[2]
     @command_line_date = ARGV[3]
     @text   = text
@@ -27,18 +29,23 @@ class Enigma
 
   end
 
-  def write_output
+  def write__encrypt_output
     File.open(output, 'w') { |file| file.write(@text) }
-    # puts "Created #{@output} with the key #{@key_string} and date #{rotations.date_string}"
+    puts "Created #{@output} with the key #{@rotations.key_string} and date #{@rotations.date_string}"
   end
 
-  def rotations
-    OffsetCalculator.new
+  def write__decrypt_output
+    File.open(output, 'w') { |file| file.write(@text) }
+    puts "Created #{@output} with the key #{@command_line_key} and date #{@command_line_date}"
   end
+
+  # def rotations
+  #   OffsetCalculator.new
+  # end
 
   def encrypt(input, rotation = [a = 0, b = 0, c = 0, d = 0])
     input = @text
-    rotation = rotations.final_rotations
+    rotation = @rotations.final_rotations
     counter = -1
     @text = input.chars.map.with_index do |letter|
       counter += 1
@@ -52,8 +59,8 @@ class Enigma
         @characters[@characters.find_index(letter.downcase) + (rotation[3] % 39) - 39]
       end
     end.join
-     write_output
-  end
+    write_encrypt_output
+   end
 
   def decrypt(scrambled_message, key)
     key = @command_line_key
@@ -71,7 +78,7 @@ class Enigma
         @characters[-@characters.find_index(letter.downcase) + (combiner(key)[3] % 39) - 39]
       end
     end.join
-    write_output
+    write_decrypt_output
   end
 
   def manual_key_entry(key_string)
