@@ -7,6 +7,7 @@ class Enigma
   attr_reader :input,
               :output,
               :text,
+              :text2,
               :characters,
               :command_line_key,
               :command_line_date,
@@ -131,6 +132,9 @@ class Enigma
   end
 
   def crack(scrambled_message, date)
-
+    scrambled_message = @output
+    date = @command_line_date
+    #scrambled_message.chars.map do |character|
+    binding.pry
   end
 end
