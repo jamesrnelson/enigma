@@ -4,7 +4,12 @@ require 'pry'
 require 'Date'
 
 class Enigma
-  attr_reader :input, :output, :text, :characters
+  attr_reader :input,
+              :output,
+              :text,
+              :characters,
+              :command_line_key,
+              :command_line_date
   def initialize(a = 0, b = 9)
     @input  = ARGV[0]
     @output = ARGV[1]
@@ -53,7 +58,7 @@ class Enigma
   def decrypt(scrambled_message, key)
     key = @command_line_key
     counter = -1
-    scrambled_message = @text
+    scrambled_message = @output
     scrambled_message.chars.map do |letter|
     counter += 1
       if counter % 4 == 0
